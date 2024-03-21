@@ -2,10 +2,11 @@
   "name": "labb1",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.html",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "npm run start",
-    "build": "npm build"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "author": "Jonas Ståleker",
   "license": "ISC",
