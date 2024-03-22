@@ -38,14 +38,14 @@ function saveCourse(): void {
         if (confirm('Kursen finns redan. Vill du skriva över med den nya informationen?')) {
             /* skriv över med ny information */
             existingCourse.innerHTML = `
-            <div class='course' id='${newCourse.code}'>
+            
             <ul>
             <li>Kurskod: ${newCourse.code}</li>
             <li>Kursnamn: ${newCourse.name}</li>
             <li>Progression: ${newCourse.progression}</li>
             <li><a href=${newCourse.syllabus}>Länk till kursplanen</a></li>
             </ul>
-            </div>`;
+            `;
 
             /* update till local storage */
             updateCourse(newCourse);
