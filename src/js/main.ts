@@ -18,6 +18,7 @@ clearAllBtnEl.addEventListener('click', clearAllCourses, false);
 /* funktion för att spara en kurs */
 function saveCourse(): void {
 
+
     /* Lagra kursvariablerna */
     const codeInput: string = (document.getElementById("code") as HTMLInputElement).value;
     const nameInput: string = (document.getElementById("name") as HTMLInputElement).value;
@@ -31,13 +32,19 @@ function saveCourse(): void {
         progression: progressionInput,
         syllabus: syllabusInput
     };
-    /* kontrollera om kurser redan finns */
-    const existingCourse = document.getElementById(codeInput);
 
-    if (existingCourse) {
-        if (confirm('Kursen finns redan. Vill du skriva över med den nya informationen?')) {
-            /* skriv över med ny information */
-            existingCourse.innerHTML = `
+    /* kontrollera att alla fält är ifyllda */
+    if (codeInput.length === 0 || nameInput.length === 0 || syllabusInput.length === 0) {
+        alert('Fyll i alla fält innan du sparar!');
+    } else {
+
+        /* kontrollera om kurser redan finns */
+        const existingCourse = document.getElementById(codeInput);
+
+        if (existingCourse) {
+            if (confirm('Kursen finns redan. Vill du skriva över med den nya informationen?')) {
+                /* skriv över med ny information */
+                existingCourse.innerHTML = `
             
             <ul>
             <li>Kurskod: ${newCourse.code}</li>
@@ -47,23 +54,23 @@ function saveCourse(): void {
             </ul>
             `;
 
-            /* update till local storage */
-            updateCourse(newCourse);
+                /* update till local storage */
+                updateCourse(newCourse);
+            }
+
+        } else {
+
+            /* skriv ut kursen till DOM */
+            writeToDOM(newCourse);
+
+            /* rensa formuläret */
+            (document.getElementById("courseForm") as HTMLFormElement).reset();
+
+            /* spara till local storage */
+            saveToLocalStorage(newCourse);
         }
 
-    } else {
-
-        /* skriv ut kursen till DOM */
-        writeToDOM(newCourse);
-
-        /* rensa formuläret */
-        (document.getElementById("courseForm") as HTMLFormElement).reset();
-
-        /* spara till local storage */
-        saveToLocalStorage(newCourse);
     }
-
-
 }
 
 /* Rensa alla kurser */
