@@ -36,6 +36,40 @@ function saveCourse(): void {
     };
 
     /* skriv ut kursen till DOM */
+    writeToDOM(newCourse);
+
+    /* rensa formuläret */
+    (document.getElementById("courseForm") as HTMLFormElement).reset();
+
+    /* spara till local storage */
+    saveToLocalStorage(newCourse);
+}
+
+/* Rensa alla kurser */
+function clearAllCourses(): void {
+    courseListEl.innerHTML = '';
+}
+
+/* funktion för att spara till local storage */
+function saveToLocalStorage(item: courseInfo): void {
+    // Hämta befintlig data från local storage
+    const existingDataString = localStorage.getItem('items');
+
+    // Om det finns befintlig data, parsa den från JSON till en array
+    let existingData: courseInfo[] = [];
+    if (existingDataString) {
+        existingData = JSON.parse(existingDataString);
+    }
+
+    // Lägg till den nya posten till den befintliga datan
+    existingData.push(item);
+
+    // Spara den uppdaterade datan tillbaka till local storage
+    localStorage.setItem('items', JSON.stringify(existingData));
+}
+
+/* funktion för att skriva ut till DOM */
+function writeToDOM(newCourse): void {
     courseListEl.innerHTML += `
     <div class='course'>
     <ul>
@@ -46,22 +80,19 @@ function saveCourse(): void {
     </ul>
     </div>
     `;
-
-    /* rensa formuläret */
-    (document.getElementById("courseForm") as HTMLFormElement).reset() ;
-
-    /* spara till local storage */
-    saveToLocalStorage(newCourse);
-
 }
 
-/* Rensa alla kurser */
-function clearAllCourses(): void {
-courseListEl.innerHTML = '';
-}
+/* ladda in kurser från local storage */
+window.onload = () => {
+    const coursesJson = localStorage.getItem('items');
+    console.log(coursesJson);
 
-/* funktion för att spara till local storage */
-function saveToLocalStorage(item : courseInfo): void {
-    
-localStorage.setItem('item', JSON.stringify(item));
+    if (coursesJson) { // Kontrollerar att coursesJson inte är null
+        const courses: courseInfo[] = JSON.parse(coursesJson);
+        courses.forEach(e => {
+            writeToDOM(e);
+        });
+    } else {
+        console.log("Inga kurser hittades i local storage.");
+    }
 }
