@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap");
+
+body {
+    margin: 0 auto;
+    max-width: fit-content;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(45deg, greenyellow, dodgerblue);
+    font-family: "Sansita Swashed", cursive;
+}
+
+h1 {
+    font-size: 2em;
+    border-left: 5px solid dodgerblue;
+    padding: 10px;
+    color: #000;
+    letter-spacing: 5px;
+    margin-bottom: 60px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+p {
+    margin: 0;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+#courseForm,
+#courseList {
+    background-color: rgba($color: #ffffff, $alpha: 0.9);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.course {
+    border: solid 1px black;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}

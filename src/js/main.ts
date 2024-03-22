@@ -47,7 +47,7 @@ function saveCourse(): void {
             </ul>
             </div>`;
 
-            /* spara till local storage */
+            /* update till local storage */
             updateCourse(newCourse);
         }
 
